@@ -1,4 +1,4 @@
-# Regional Marketplace Performance Dashboard — Template
+# Regional Marketplace Performance Dashboard Template
 
 A reference implementation of a performance measurement framework for a two-sided mobility
 marketplace, covering a single product segment across multiple countries and cities.
