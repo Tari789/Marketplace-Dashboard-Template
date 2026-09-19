@@ -14,7 +14,7 @@ conventions.
 ## What this is for
 
 Most dashboard portfolios show a screenshot. The interesting part of building a reporting layer
-isn't the chart — it's the decisions underneath it:
+isn't the chart, it's the decisions underneath it:
 
 - What exactly counts as an "active driver"?
 - Is utilization measured against online time or against total time?
