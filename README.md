@@ -75,6 +75,6 @@ See `metrics/metric_dictionary.md` for full definitions.
 
 ## Notes on scope
 
-- Synthetic data only — no real volumes, markets, or identifiers
+- Synthetic data only, no real volumes, markets, or identifiers
 - Metric formulas are standard two-sided-marketplace definitions
 - Table names are generic dimensional-model conventions, not from any specific warehouse
