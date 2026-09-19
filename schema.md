@@ -1,6 +1,6 @@
 # Source Schema
 
-Three fact tables and two dimensions. Generic dimensional-model naming — this is a reference
+Three fact tables and two dimensions. Generic dimensional-model naming, this is a reference
 structure, not a specific warehouse.
 
 ---
@@ -12,7 +12,7 @@ One row per trip request. The primary table for volume, cancellation, and reliab
 | Column | Type | Notes |
 |---|---|---|
 | `trip_id` | STRING | Primary key |
-| `city_id` | INTEGER | FK → `dim_city` |
+| `city_id` | INTEGER | FK >> `dim_city` |
 | `driver_id` | STRING | Null where unfulfilled |
 | `rider_id` | STRING | |
 | `segment` | STRING | Product segment identifier |
@@ -30,7 +30,7 @@ One row per trip request. The primary table for volume, cancellation, and reliab
 **Grain:** one row per request, not per completed trip. A rider who requests, cancels, and
 re-requests produces two rows.
 
-**Partitioned on `event_date`.** Always filter on it — and keep it bare, never wrapped in a
+**Partitioned on `event_date`.** Always filter on it, and keep it bare, never wrapped in a
 function, or partition pruning is lost.
 
 ---
@@ -42,7 +42,7 @@ One row per driver per day per city. Source for all supply-side metrics.
 | Column | Type | Notes |
 |---|---|---|
 | `driver_id` | STRING | |
-| `city_id` | INTEGER | FK → `dim_city` |
+| `city_id` | INTEGER | FK >> `dim_city` |
 | `segment` | STRING | |
 | `hours_open` | DECIMAL | Online, no trip assigned |
 | `hours_enroute` | DECIMAL | Assigned, driving to pickup |
@@ -64,7 +64,7 @@ One row per rider session. Source for conversion metrics.
 |---|---|---|
 | `session_id` | STRING | Primary key |
 | `rider_id` | STRING | |
-| `city_id` | INTEGER | FK → `dim_city` |
+| `city_id` | INTEGER | FK >> `dim_city` |
 | `segment` | STRING | |
 | `requested_trips` | INTEGER | Requests in this session |
 | `completed_trips` | INTEGER | Completions in this session |
@@ -110,8 +110,8 @@ vanishing from the chart.
 
 # MODELLING NOTES
 
-**Grain differs across the three fact tables.** Trip-level, driver-day-level, and session-level
-respectively. They cannot be joined directly without aggregating to a common grain first —
+**Grain differs across the three fact tables.** Trip level, driver-day-level, and session level
+respectively. They cannot be joined directly without aggregating to a common grain first,
 attempting it produces a fan-out.
 
 **Distinct counts are not additive.** Active drivers and active riders must be recalculated at
